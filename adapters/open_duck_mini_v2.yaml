@@ -1,0 +1,42 @@
+# Open Duck Mini V2 适配器
+# 平台通过该描述文件接入子项目，不修改子项目代码
+name: open_duck_mini_v2
+display_name: Open Duck Mini V2
+description: 双足鸭子机器人 · 行走 / 站立 RL 训练（MuJoCo MJX + PPO）
+
+# 子项目仓库根目录（相对本平台目录）
+repo_root: ".."
+
+# MJCF 资源目录（相对仓库根目录），前端查看器从该目录打包加载
+xmls_dir: playground/open_duck_mini_v2/xmls
+
+# 参考运动数据（相对仓库根目录），行走策略的步态相位周期来源
+reference_motion: playground/open_duck_mini_v2/data/polynomial_coefficients.pkl
+
+# 训练命令模板（在仓库根目录下执行）
+# {env} {task} {num_timesteps} {output_dir} 由平台填充
+# output_dir 使用相对路径（相对仓库根），保证 WSL 与 Windows 侧看到同一目录
+train_command: >-
+  uv run playground/open_duck_mini_v2/runner.py
+  --env {env} --task {task} --num_timesteps {num_timesteps}
+  --output_dir {output_dir}
+
+# 平台界面上的默认训练步数（完整训练约 150M，预览可用较小值）
+default_timesteps: 30000000
+
+# 可用环境与任务（与 constants.task_to_xml 中实际存在的 xml 对应）
+envs:
+  joystick:
+    - flat_terrain
+    - flat_terrain_backlash
+    - rough_terrain_backlash
+  standing:
+    - flat_terrain
+    - flat_terrain_backlash
+    - rough_terrain_backlash
+
+# Copilot 生成环境（M2）：启动时扫描该目录下的 *.py 并注册为可用环境
+# 环境的任务（xml 场景）列表复用 tasks_from 指定的环境
+generated_envs:
+  dir: playground/open_duck_mini_v2/generated
+  tasks_from: standing

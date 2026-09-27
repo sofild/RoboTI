@@ -1,0 +1,27 @@
+# --- secrets / local config ---
+platform.yaml
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# --- Node / frontend ---
+node_modules/
+dist/
+tsconfig.tsbuildinfo
+frontend/public/mujoco.wasm
+frontend/public/ort-wasm-*
+
+# --- runtime data (jobs, logs, checkpoints) ---
+data/jobs/
+checkpoints/
+*.onnx
+*.pkl
+
+# --- misc ---
+.tmp/
+_shots/
+.DS_Store
+Thumbs.db

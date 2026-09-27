@@ -1,0 +1,29 @@
+# RoboTI platform configuration
+# Copy this file to `platform.yaml` and fill in your own values.
+
+server:
+  host: 127.0.0.1
+  port: 8000
+
+training:
+  # wsl:   run training inside a WSL distro via wsl.exe (recommended on Windows,
+  #        training env lives in WSL)
+  # local: run training directly in the local shell
+  mode: wsl
+  wsl_distro: "Ubuntu-22.04"
+
+# Adapter directory (one yaml per robot sub-project)
+adapters_dir: adapters
+
+# Runtime data (job metadata, log index)
+data_dir: data
+
+# LLM Copilot (M2: code generation, any OpenAI-compatible API)
+# Fill base_url / api_key / model to enable the Copilot.
+llm:
+  base_url: "https://open.bigmodel.cn/api/paas/v4"   # e.g. https://open.bigmodel.cn/api/paas/v4
+  api_key: "<YOUR_API_KEY>"                          # your API key
+  model: "glm-4.6"                                   # e.g. glm-4.6 / deepseek-chat
+  temperature: 0.2
+  timeout_seconds: 300
+  max_tokens: 16000
